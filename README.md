@@ -28,9 +28,12 @@ This is an exploratory notebook used for the (ongoing) *Kaggle Competition* http
 Up until now in the notebook I have implemented:
 - vocabulary extraction 
 - **GloVe** embedding training with **Stochastic Gradient Descent**
+- training pipeline (using the learned embeddings to train a sentiment classifier)
+- predictions pipeline (using the learned embeddings and the trained classifier to predict tweets sentiment)
 
 #### Next up: 
-- smarter preprocessing 
-- classification pipeline completion
+- smarter preprocessing (hashtags, punctuation, ...)
+- more rigorous model assessment
+- training data analysis (using a simple linear model, which words would have more predictive power? ...)
 
 *Note*: to be able run this notebook you need to have the *.zip* datasets in your current working file system, or in your *Google Drive* folder.
