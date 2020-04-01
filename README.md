@@ -45,7 +45,7 @@ Up until now in the notebook I have implemented:
 This comes from ```Machine Perception``` class ```@ETH``` during 2020 spring semester. <br>
 The inspiration from this notebook was drawn from [this beautiful blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/).
 The idea is to train an LSTM on *character-level text prediction* using a single .txt file. I chose a text from the [Gutenberg](http://www.gutenberg.org/) repository, namely *la Divina Commedia* , by *Dante Alighieri*. 
-<br> Maybe what is most exciting about this work is perfectly syntetised by *Andrej Karpathy* (the author of the blog post): 
+<br> Maybe what is most exciting about this work is perfectly synthesized by *Andrej Karpathy* (the author of the blog post): 
  > There’s something magical about Recurrent Neural Networks (RNNs). [...] Sometimes the ratio of how simple your model is to the quality of the results you get out of it blows past your expectations, and this was one of those times. 
  
 On the right a preview of the results. 
