@@ -14,12 +14,12 @@ The goal of the exercise is to implement PLSA by using the EM algorithm, and to 
 
 ## CNN exercise (in fieri)
 
-<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/ComputationalGraph.jpg" width=200 align=right>
+<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/ComputationalGraph.jpg" width=250 align=left>
 
 This comes from ```Machine perception``` class ```@ETH``` during 2020 spring semester. <br>The exercise explores the building blocks of a Convolutional Neural Network from a low level implementation perspective (```@tensorflow 1.x```). Going through the exercise challenges one's understanding of the basics of the ```Tensorflow``` library, and offers an overview of some good common practices (```name scopes```,```variable initialization ```,```summaries```,...)
 #### Future work
-The first version of the exercise uses the classic MNIST dataset. Ideally, a second version will also focus on assembling a personal dataset. <br>
-<br> On the right, an overview of the computational graph, from ```Tensorboard```. 
+The first version of the exercise uses the classic MNIST dataset. Ideally, a second version will also focus on assembling a personal dataset. 
+On the left, an overview of the computational graph, from ```Tensorboard```. 
 
 ## Sentiment analysis exercise (in fieri)
 This comes from ```Computational Intelligence Lab``` class ```@ETH``` during 2020 spring semester. <br>
@@ -40,12 +40,28 @@ Up until now in the notebook I have implemented:
 
 ## Writing like Dante
 
-<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/Dante.jpg" width=300 align=right>
-
 This comes from ```Machine Perception``` class ```@ETH``` during 2020 spring semester. <br>
 The inspiration from this notebook was drawn from [this beautiful blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/).
 The idea is to train an LSTM on *character-level text prediction* using a single .txt file. I chose a text from the [Gutenberg](http://www.gutenberg.org/) repository, namely *la Divina Commedia* , by *Dante Alighieri*. 
 <br> Maybe what is most exciting about this work is perfectly synthesized by *Andrej Karpathy* (the author of the blog post): 
  > There’s something magical about Recurrent Neural Networks (RNNs). [...] Sometimes the ratio of how simple your model is to the quality of the results you get out of it blows past your expectations, and this was one of those times. 
  
-On the right a preview of the results. 
+Here's a preview of the results: 
+> E io a lui: «Dor, fosse, tra miggia,<br>
+  non li oche giaco, se Cercoresto daicra<br>
+  feruto alcundon par de' Fuorchi sonno,<br>
+  me steso le sue cadëa in avro si tecco.<br><br>
+  Tattir si poccia a corpo par savilsa;<br>
+  e ch'io forse di quanto a terra soscruto,<br>
+  mi fu maca scricciatà il focose<br>
+  al figuboro e deggea feder puoso.<br><br>
+  Per convien la bercine dol posova<br>
+  de l'un cheggio, e a le piaggi traddume.<br>
+
+
+## Image compression by clustering
+<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/compressions.jpg">
+
+This comes from ```Computational Intelligence Lab``` class ```@ETH``` during 2020 spring semester. <br>
+The goal of this notebook was to explore different clustering algorithms in the setting of *Image Compression*. <br>
+Above you can see the result obtained with K-means for different values of k (the number of clusters). 
