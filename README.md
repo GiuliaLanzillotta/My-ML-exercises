@@ -65,3 +65,9 @@ Here's a preview of the results:
 This comes from ```Computational Intelligence Lab``` class ```@ETH``` during 2020 spring semester. <br>
 The goal of this notebook was to explore different clustering algorithms in the setting of *Image Compression*. <br>
 Above you can see the result obtained with K-means for different values of k (the number of clusters). 
+
+## Dijkstra’s algorithm (in fieri)
+
+Here the goal is to implement a Monte Carlo simulation that calculates the average shortest path in a graph. The shortest path algorithm will be Dijkstra’s.
+
+
