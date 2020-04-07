@@ -7,6 +7,7 @@
 #include <ctime>
 #include <forward_list>
 #include <array>
+#include <queue>
 using namespace std;
 
 
@@ -23,52 +24,93 @@ Design considerations ---------
 - the choice for the representation of a graph are 2: 
     - edge lists
     - adjacency matrix
-    The implementation that follows uses the edge list
-    representation of a graph because Dijkstra's algorithm 
-    requires to visit the graph by following the edges 
-    starting from one initial node. To get the next node
-    in an edge-list representation costs 1, while in an 
-    adjacency matrix representation it would cost m, where m
-    is the number of nodes that come before the next one 
-    in the list of nodes of the graph. 
+    For sparse graphs, the list approach is typically 
+    more efficient, but for dense graphs, the matrix 
+    approach can be more efficient (reference an Algorithm’s 
+    source for space and time analysis).
 - for simplicity and efficiency I use integers to 
     identify nodes (costant time access to sequential
     containers).
+- TODO: support node value 
 */
 
-
+template <class T, class weight> 
 class graph{
+
     public: 
-    // Set of constructors 
-    // TODO: verify the correcteness of this constructor. 
-    graph():n(50),nodes(new forward_list<int>[50]){}
-
+        // Set of constructors 
+        // TODO: verify the correcteness of this constructor. 
+        graph():n(0),nodes(nullptr),values(nullptr){}
+        // returns number of nodes in the graph
+        int V(){return n;}
+        // returns number of edges in the graph
+        int E(){return e;}
+        // tests whether there is an edge from node x to node y
+        bool adjacent(int x, int y){}
+        // lists all nodes y such that there is an edge from x to y.
+        forward_list<int> neighbors(int x){}
+        //adds to G the edge from x to y, if it is not there.
+        bool add_edge(int x, int y){
+            // TODO: update the number of edges in the graph 
+            // TODO: check whether the two nodex exist
+            return false;
+        }
+        // removes the edge from x to y, if it is there.
+        bool delete_edge(int x, int y){
+            // TODO: update the number of edges in the graph 
+            return false;
+        }
+        // returns the value associated with the node x.
+        T get_node_value(int x){}
+        // sets the value associated with the node x to a
+        void set_node_value(int x, T a){}
+        // returns the value associated to the edge (x,y).
+        weight get_edge_value(int x, int y){}
+        // sets the value associated to the edge (x,y) to v
+        void set_edge_value(int x, int y, weight v){}
+ 
     private:
-    int n;
-    forward_list<int>* nodes;
-    /*A procedure that produces a randomly generated 
-    set of edges with positive weight.
-    The procedure runs through all possible 
-    undirected edges and places the edge 
-    in the graph if a random probability calculation 
-    is less than the density.
-    Parameters ---------
-    - : edge density 
-    - : distance range
-    
-    */
+        int n, e;
+        forward_list<int>* nodes;
+        T* values;
+        void randomly_set_edges(float density, int min_dist, int max_dist){
+        /*A procedure that produces a randomly generated 
+        set of edges with positive weight.
+        The procedure runs through all possible 
+        undirected edges and places the edge 
+        in the graph if a random probability calculation 
+        is less than the density.
+        Parameters ---------
+        - : edge density 
+        - : distance range
+        */}
 
 
 };
 
-class priority_queue{
-    public:
-    private:
-};
-
+template <class weigth>
 class shortest_path{
+    /*
+    -dist:
+    We need to mantain an array of distances: 
+    for each node in the graph we save its distance from 
+    the source (the weighted length of the shortest path)
+    -queue: 
+    We need to mantain a queue of nodes to visit: 
+    -previous nodes:
+    We need to mantain an array of previous nodes so that
+    we can reconstruct the shortest path.
+    */
     public:
+        // find shortest path between u-w and returns the 
+        // sequence of vertices representing shorest path 
+        forward_list<int> path(int u, int v){}
+        // return the path cost associated with the shortest path.
+        weight path_size(int u, int v){}
     private:
+        graph* g;
+        priority_queue<int> queue;
+
 };
 
 int main()
