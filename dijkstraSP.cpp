@@ -13,7 +13,9 @@ using namespace std;
 
 
 /* About the Graph data type: 
-I here represent a graph as an ARRAY of FORWARD-LISTS. 
+I here represent a graph as a 2-dimensional array.
+Arrays are the fastest (constant random access)
+and most memory efficient structures in c++.
 References -------------
 http://www.cplusplus.com/reference/array/array/
 http://www.cplusplus.com/reference/forward_list/forward_list/
