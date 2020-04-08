@@ -34,7 +34,6 @@ Design considerations ---------
 - for simplicity and efficiency I use integers to 
     identify nodes (costant time access to sequential
     containers).
-- TODO: support node value 
 */
 
 template <class T, class weight> 
