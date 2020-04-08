@@ -8,6 +8,7 @@
 #include <forward_list>
 #include <array>
 #include <queue>
+#include <algorithm>
 using namespace std;
 
 
@@ -38,40 +39,72 @@ template <class T, class weight>
 class graph{
 
     public: 
-        // Set of constructors 
-        // TODO: verify the correcteness of this constructor. 
-        graph():n(0),nodes(nullptr),values(nullptr){}
+        // Default constructor. 
+        // Please note that by default we build a graph of 50 nodes. 
+        graph(){
+            n = 50;
+            this.weigths = new weight*[n];
+            fill(*this.weights, *this.weights + n*n,default_value);
+            this.nodes = new nodes[n];
+        }
+        // Build graph with no edges
+        graph(int n){
+            this.n = n;
+            this.weigths = new weight*[n];
+            fill(*this.weights, *this.weights + n*n,default_value);
+            this.nodes = new nodes[n];
+        }
+        // Build graph and initialize edges randomly
+        graph(int n, float density, int min_dist, int max_dist){
+            graph(n);
+            randomly_set_edges(density,min_dist,max_dist);
+        }
+        //TODO: 
+        //add destructor method
         // returns number of nodes in the graph
         int V(){return n;}
         // returns number of edges in the graph
         int E(){return e;}
         // tests whether there is an edge from node x to node y
-        bool adjacent(int x, int y){}
+        bool adjacent(int x, int y){
+            return weight[x][y]!=default_value;}
         // lists all nodes y such that there is an edge from x to y.
-        forward_list<int> neighbors(int x){}
+        forward_list<int>* neighbors(int x){
+            return new forward_list<int>();}
         //adds to G the edge from x to y, if it is not there.
         bool add_edge(int x, int y){
-            // TODO: update the number of edges in the graph 
             // TODO: check whether the two nodex exist
-            return false;
+            this.e++;
+            return true;
         }
         // removes the edge from x to y, if it is there.
         bool delete_edge(int x, int y){
-            // TODO: update the number of edges in the graph 
-            return false;
+            this.e--; 
+            return true;
         }
         // returns the value associated with the node x.
-        T get_node_value(int x){}
+        T get_node_value(int x){return values[x];}
         // sets the value associated with the node x to a
-        void set_node_value(int x, T a){}
+        void set_node_value(int x, T a){this.values[x] = a;}
         // returns the value associated to the edge (x,y).
-        weight get_edge_value(int x, int y){}
+        weight get_edge_value(int x, int y){return weights[x,y];}
         // sets the value associated to the edge (x,y) to v
-        void set_edge_value(int x, int y, weight v){}
+        void set_edge_value(int x, int y, weight v){weights[x,y]=v;}
  
     private:
         int n, e;
-        forward_list<int>* nodes;
+        // We use the adjacency matrix representation
+        // The ij-th element of the matrix represents the 
+        // edge between the two nodes, and carries its 
+        // weight with it 
+        weight** nodes;
+        // Initial value for the edge weights.
+        // The absence of an edge can be easily checked,
+        // since the weigths of existing edges are supposed
+        // to be non-negative 
+        const weight default_value = static_cast<weight>(-1);
+        // We separetly store the values of the nodes
+        // Each node can be associated with some value.
         T* values;
         void randomly_set_edges(float density, int min_dist, int max_dist){
         /*A procedure that produces a randomly generated 
@@ -104,11 +137,11 @@ class shortest_path{
     public:
         // find shortest path between u-w and returns the 
         // sequence of vertices representing shorest path 
-        forward_list<int> path(int u, int v){}
+        forward_list<int> path(int u, int v){return nullptr;}
         // return the path cost associated with the shortest path.
-        weight path_size(int u, int v){}
+        weight path_size(int u, int v){return nullptr;}
     private:
-        graph* g;
+        graph<int,int>* g;
         priority_queue<int> queue;
 
 };
@@ -137,5 +170,6 @@ int main()
     //the average. 
     //This should be very rare for the chosen 
     //  density and size in this homework
+    return 0;
 }
 
