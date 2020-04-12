@@ -19,7 +19,9 @@ The goal of the exercise is to implement PLSA by using the EM algorithm, and to 
 This comes from ```Machine perception``` class ```@ETH``` during 2020 spring semester. <br>The exercise explores the building blocks of a Convolutional Neural Network from a low level implementation perspective (```@tensorflow 1.x```). Going through the exercise challenges one's understanding of the basics of the ```Tensorflow``` library, and offers an overview of some good common practices (```name scopes```,```variable initialization ```,```summaries```,...)
 #### Future work
 The first version of the exercise uses the classic MNIST dataset. Ideally, a second version will also focus on assembling a personal dataset. 
-On the left, an overview of the computational graph, from ```Tensorboard```. 
+On the left, an overview of the computational graph, from ```Tensorboard```. <br>
+<br>
+<br>
 
 ## Sentiment analysis exercise (in fieri)
 This comes from ```Computational Intelligence Lab``` class ```@ETH``` during 2020 spring semester. <br>
