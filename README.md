@@ -23,7 +23,7 @@ On the left, an overview of the computational graph, from ```Tensorboard```. <br
 <br>
 <br>
 
-## Sentiment analysis exercise (in fieri)
+## Sentiment analysis exercise -> SA repo
 This comes from ```Computational Intelligence Lab``` class ```@ETH``` during 2020 spring semester. <br>
 This is an exploratory notebook used for the (ongoing) *Kaggle Competition* https://www.kaggle.com/c/cil-text-classification-2020/data.
 
@@ -33,10 +33,8 @@ Up until now in the notebook I have implemented:
 - training pipeline (using the learned embeddings to train a sentiment classifier)
 - predictions pipeline (using the learned embeddings and the trained classifier to predict tweets sentiment)
 
-#### Next up: 
-- smarter preprocessing (hashtags, punctuation, ...)
-- more rigorous model assessment
-- training data analysis (using a simple linear model, which words would have more predictive power? ...)
+**Update 12.04.20**:<br>
+The project moved to a dedicated repo. You can see all the changes there. 
 
 *Note*: to be able run this notebook you need to have the *.zip* datasets in your current working file system, or in your *Google Drive* folder.
 
