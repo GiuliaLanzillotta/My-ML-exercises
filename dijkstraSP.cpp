@@ -9,13 +9,12 @@
 #include <array>
 #include <queue>
 #include <algorithm>
+#include <ctime>
 using namespace std;
 
 
 /* About the Graph data type: 
-I here represent a graph as a 2-dimensional array.
-Arrays are the fastest (constant random access)
-and most memory efficient structures in c++.
+I here represent a graph as an ARRAY of FORWARD-LISTS. 
 References -------------
 http://www.cplusplus.com/reference/array/array/
 http://www.cplusplus.com/reference/forward_list/forward_list/
@@ -34,6 +33,7 @@ Design considerations ---------
 - for simplicity and efficiency I use integers to 
     identify nodes (costant time access to sequential
     containers).
+- TODO: support node value 
 */
 
 template <class T, class weight> 
@@ -60,8 +60,11 @@ class graph{
             graph(n);
             randomly_set_edges(density,min_dist,max_dist);
         }
-        //TODO: 
-        //add destructor method
+        ~graph(){
+            delete nodes;
+            delete values;
+        }
+
         // returns number of nodes in the graph
         int V(){return n;}
         // returns number of edges in the graph
@@ -71,15 +74,22 @@ class graph{
             return weight[x][y]!=default_value;}
         // lists all nodes y such that there is an edge from x to y.
         forward_list<int>* neighbors(int x){
-            return new forward_list<int>();}
+            neighbs = new forward_list<int>();
+            for(int i=0; i<n; i++){
+                if(nodes[x][i]!=this.default_value)
+                    neighbs.push_front(i);
+            }
+            return neighbs;
+        }
         //adds to G the edge from x to y, if it is not there.
         bool add_edge(int x, int y){
-            // TODO: check whether the two nodex exist
+            nodes[x][y] = 0; 
             this.e++;
             return true;
         }
         // removes the edge from x to y, if it is there.
         bool delete_edge(int x, int y){
+            nodes[x][y] = this.default_value;
             this.e--; 
             return true;
         }
@@ -107,6 +117,15 @@ class graph{
         // We separetly store the values of the nodes
         // Each node can be associated with some value.
         T* values;
+        // Helper functions to randomly set the edges
+        double prob(){
+            srand(time(0)); 
+            return ((double)(rand()) /RAND_MAX);
+        }
+        weight random_weight(weight min,weight max){
+            srand(time(0)); 
+            return rand()%(max-min + 1) + min;
+        }
         void randomly_set_edges(float density, int min_dist, int max_dist){
         /*A procedure that produces a randomly generated 
         set of edges with positive weight.
@@ -117,7 +136,17 @@ class graph{
         Parameters ---------
         - : edge density 
         - : distance range
-        */}
+        */
+            for(int i=0; i<n; i++){
+                for(int j=i+1;i<n;i++){
+                    if(prob()<=density){
+                        weight edge_weight = random_weight(min_dist,max_dist);
+                        nodes[i][j] = nodes[j][i] = edge_weight;
+                        this.e ++;
+                    } 
+                }
+            }
+       }
 
 
 };
@@ -171,6 +200,11 @@ int main()
     //the average. 
     //This should be very rare for the chosen 
     //  density and size in this homework
+    int ** W; 
+    W = new int*[10];
+    W[0][2] = 3;
+    cout << W[0][2] <<endl;
+    cout << W[0][1];
     return 0;
 }
 
