@@ -70,4 +70,13 @@ Above you can see the result obtained with K-means for different values of k (th
 
 Here the goal is to implement a Monte Carlo simulation that calculates the average shortest path in a graph. The shortest path algorithm will be Dijkstra’s.
 
+## Tweet Generator (in fieri)
+Implementation of **Generating sentences from a continuous space paper**<br>
+Here's a link to the [paper](https://arxiv.org/pdf/1511.06349v4.pdf).
 
+> ### The goal 
+> What I want to explore here is the expression of sentiment in generative models. <br>
+> The dataset consists of two different samples of tweets, one with positive sentiment and one with negative sentiment. <br>
+> The goal is to train two generators on the two sets separetly and analyse the qualitative differences.
+
+*Note*: to be able run this notebook you need to have the *.zip* datasets in your current working file system, or in your *Google Drive* folder.
