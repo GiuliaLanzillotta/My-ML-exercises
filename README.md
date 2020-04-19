@@ -80,3 +80,10 @@ Here's a link to the [paper](https://arxiv.org/pdf/1511.06349v4.pdf).
 > The goal is to train two generators on the two sets separetly and analyse the qualitative differences.
 
 *Note*: to be able run this notebook you need to have the *.zip* datasets in your current working file system, or in your *Google Drive* folder.
+
+## Intro to Quantum computing (for machine learning) (in fieri)
+Following the ```Quantum Machine Learning``` course on EdX. I'll group here some notes & exercises. <br>
+>#### Why quantum computing? <br>
+My interest on the filed was motivated by Roger Penrose talk on @LexFridman podcast, one of the few promoters of a Quantum theory of consciousness. 
+> ### Understanding is, after all, what science is all about — and science is a great deal more than mindless computation. <br>
+[Here's the link to the course](https://courses.edx.org/courses/course-v1:University_of_TorontoX+UTQML101x+2T2019/course/). 
