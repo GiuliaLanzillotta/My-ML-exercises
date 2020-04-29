@@ -87,3 +87,9 @@ Following the ```Quantum Machine Learning``` course on EdX. I'll group here some
 My interest on the filed was motivated by Roger Penrose talk on @LexFridman podcast, one of the few promoters of a Quantum theory of consciousness. 
 > ### Understanding is, after all, what science is all about — and science is a great deal more than mindless computation. <br>
 [Here's the link to the course](https://courses.edx.org/courses/course-v1:University_of_TorontoX+UTQML101x+2T2019/course/). 
+
+## Turning my sister into an old painting (in fieri)
+This notebook will explore the magic of GANs. <br>
+We are going to refer to a particular GAN architecture : **the Cycle GAN**. Here's a [link to the paper](https://arxiv.org/pdf/1703.10593.pdf) for the more curious. 
+
+>  The goal? Taking a picture of my beautiful sister and turn it into a painting, to see how she would have looked like a few centuries ago. 
