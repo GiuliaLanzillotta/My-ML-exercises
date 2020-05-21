@@ -1,5 +1,5 @@
-# (Maybe interesting) exercises
-I'll group here some (maybe interesting) exercises on machine learning-related problems. 
+# Exercises :)
+This repo gathers various exercises on ML problems. Some of them are still active projects, others are completed. 
 
 ## Collaborative filtering exercise
 
