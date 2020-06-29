@@ -1,0 +1,221 @@
+---
+title: "Comp stats notebook"
+output: html_notebook
+---
+
+# Using simple linear regression to prove the properties of LS estimator
+
+```{r}
+## generating fake dataset 
+set.seed(21)
+x <- rnorm(n=100, mean=5, sd=4)
+# the regression lines in the following two models should 
+# be the same since the error mean is absorbed in the model intercept
+eps.1 <- rnorm(n=100, mean=0, sd=1)
+eps.2 <- rnorm(n=100, mean=2, sd=1)
+y.1 <- 2 + 3*x + 5*eps.1
+y.2 <- 3*x + 5*eps.2 
+plot(x,y.1)
+abline(a=2,b=3, col="red")
+plot(x,y.2)
+abline(a=0, b=3, col="blue")
+
+```
+Now let's build the regression model.
+
+```{r}
+reg.1 <- lm(y.1~x)
+reg.2 <- lm(y.2~x)
+```
+```{r}
+summary(reg.1)
+```
+
+
+```{r}
+summary(reg.2)
+```
+
+What if we want to compute the coefficients by hand? 
+Let's do it!
+
+```{r}
+X <- matrix(cbind(rep(1,100), x), nrow = 100, ncol = 2)
+xtx.inv <- solve(t(X)%*%X)
+# coefficients 
+print("Beta 1")
+(beta.1 <- xtx.inv %*% t(X) %*% y.1)
+print("Beta 2")
+(beta.2 <- xtx.inv %*% t(X) %*% y.2)
+# predictions 
+y.hat.1 <- X%*%beta.1
+y.hat.2 <- X%*%beta.2
+# errors 
+eps.hat.1 <- y.1 - y.hat.1
+eps.hat.2 <- y.2 - y.hat.2
+# sd estimate
+sd.hat.1 <- sum(eps.hat.1**2)/(100-2)
+sd.hat.2 <- sum(eps.hat.2**2)/(100-2)
+# se for beta 
+print("Se 1")
+(se.1 <- sqrt(xtx.inv[2,2]*sd.hat.1))
+print("Se 2")
+(se.2 <- sqrt(xtx.inv[2,2]*sd.hat.2))
+# p-values of t-test
+tv.1 <- beta.1[2]/(se.1)
+tv.2 <- beta.2[2]/(se.2)
+print("P-value 1")
+(pv.1 <- pt(tv.1, df = 100-2, lower.tail = FALSE))
+print("P-value 2")
+(pv.2 <- pt(tv.2, df = 100-2, lower.tail = FALSE))
+```
+
+Exactly what we have above! What about confidence intervals? 
+
+```{r}
+ci.1.95 <- qt(0.975, df=100-2)*se.1
+ci.2.95 <- qt(0.975, df=100-2)*se.2
+
+# doing the same procedure for the intercept
+se.i.1 <- sqrt(xtx.inv[1,1]*sd.hat.1)
+se.i.2 <- sqrt(xtx.inv[1,1]*sd.hat.2)
+ci.1.i.95 <- qt(0.975, df=100-2)*se.i.1
+ci.2.i.95 <- qt(0.975, df=100-2)*se.i.2
+
+
+
+plot(x,y.1)
+abline(a=beta.1[1],b=beta.1[2], col="red")
+abline(a=beta.1[1]+ci.1.i.95,b=beta.1[2]+ci.1.95, col="pink")
+abline(a=beta.1[1]-ci.1.i.95,b=beta.1[2]-ci.1.95, col="pink")
+plot(x,y.2)
+abline(a=beta.2[1],b=beta.2[2], col="blue")
+abline(a=beta.2[1]+ci.2.i.95,b=beta.2[2]+ci.2.95, col="lightblue")
+abline(a=beta.2[1]-ci.2.i.95,b=beta.2[2]-ci.2.95, col="lightblue")
+
+```
+Now let's quickly see how stable this prediction is with a simulation. 
+
+```{r}
+## generating fake dataset 
+set.seed(21)
+nsim <- 1000
+
+coefs <- matrix(nrow=nsim, ncol=2)
+
+for(i in 1:nsim){
+  eps <- rnorm(n=100, mean=0, sd=1)
+  y <- 2 + 3*x + 5*eps
+  reg <- lm(y~x)
+  beta <- coef(reg)
+  names(beta) <- NULL
+  coefs[i,] <- beta
+}
+
+```
+As expected, each coefficient is approximately normally distributed. 
+
+```{r}
+hist(coefs[,1], freq=FALSE)
+lines(seq(-2, 5, by = 0.01), dnorm(seq(-2, 5, by = 0.01), mean= 2, sd = 5*sqrt(xtx.inv[1,1])), col="red")
+hist(coefs[,2], freq = FALSE)
+lines(seq(2.5, 3.5, by = 0.01), dnorm(seq(2.5, 3.5, by = 0.01), mean= 3, sd = 5*sqrt(xtx.inv[2,2])),col="red")
+```
+What if X can vary as well? 
+
+```{r}
+set.seed(21)
+nsim <- 1000
+
+coefs <- matrix(nrow=nsim, ncol=2)
+
+for(i in 1:nsim){
+  x<-rnorm(n=100, mean=5, sd=4)
+  eps <- rnorm(n=100, mean=0, sd=1)
+  y <- 2 + 3*x + 5*eps
+  reg <- lm(y~x)
+  beta <- coef(reg)
+  names(beta) <- NULL
+  coefs[i,] <- beta
+}
+```
+```{r}
+hist(coefs[,1], freq=FALSE)
+lines(seq(-2, 5, by = 0.01), dnorm(seq(-2, 5, by = 0.01), mean= 2, sd = 5*sqrt(xtx.inv[1,1])), col="red")
+hist(coefs[,2], freq = FALSE)
+lines(seq(2.5, 3.5, by = 0.01), dnorm(seq(2.5, 3.5, by = 0.01), mean= 3, sd = 5*sqrt(xtx.inv[2,2])),col="red")
+```
+
+
+Let's take the last model and test the assumptions!
+```{r}
+plot(reg)
+```
+
+Now let's break some assumptions. 
+```{r}
+# non normality of the noise
+eps <- 5 * (1 - rchisq(40, df = 1)) / sqrt(2)
+y <- 2 + 3*x + 5*eps
+plot(x,y)
+abline(a=2, b=3, col="blue")
+reg <- lm(y~x)
+beta <- coef(reg)
+names(beta) <- NULL
+abline(a=beta[1], b=beta[2], col="green")
+plot(reg)
+```
+```{r}
+# heteroskedasticity
+eps <- rnorm(n=100, mean=0, sd= x**3)
+y <- 2 + 3*x + 5*eps
+plot(x,y)
+abline(a=2, b=3, col="blue")
+reg <- lm(y~x)
+beta <- coef(reg)
+names(beta) <- NULL
+abline(a=beta[1], b=beta[2], col="green")
+plot(reg)
+```
+```{r}
+# Missing squared term
+eps <- rnorm(n=100, mean=0, sd= 1)
+y <- 2 + 3*x + x**2  + 5*eps
+plot(x,y)
+abline(a=2, b=3, col="blue")
+reg <- lm(y~x)
+beta <- coef(reg)
+names(beta) <- NULL
+abline(a=beta[1], b=beta[2], col="green")
+plot(reg)
+```
+
+```{r}
+# Correlated errors
+require(MASS) 
+Sigma <- matrix(0.7,100,100) 
+diag(Sigma) <- 1 
+eps <- mvrnorm(n = 1, mu = rep(0, length(x)), Sigma = Sigma)
+y <- 2 + 3*x + 5*eps
+plot(x,y)
+abline(a=2, b=3, col="blue")
+reg <- lm(y~x)
+beta <- coef(reg)
+names(beta) <- NULL
+abline(a=beta[1], b=beta[2], col="green")
+plot(reg)
+```
+
+```{r}
+# x, epsilon dependent
+eps <- rnorm(n=100, mean=x*4+1, sd= 1)
+y <- 2 + 3*x + 5*eps
+plot(x,y)
+abline(a=2, b=3, col="blue")
+reg <- lm(y~x)
+beta <- coef(reg)
+names(beta) <- NULL
+abline(a=beta[1], b=beta[2], col="green")
+plot(reg)
+```
+
