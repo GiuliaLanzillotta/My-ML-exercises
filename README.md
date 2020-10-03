@@ -91,8 +91,8 @@ In the plot below you can see the results of image compression using FFT transfo
  
 <div align="center">
 <img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/pics/sp3.png" width="250" >
-<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/pics/sp4.png" width="300" >
-<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/pics/sp5.png" width="300">
+<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/pics/sp4.png" width="250" >
+<img src="https://github.com/GiuliaLanzillotta/exercises/blob/master/pics/sp5.png" width="250">
 </div>
 
 
